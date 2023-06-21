@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>二进制</title>
+    <url>/2023/06/15/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E4%BA%8C%E8%BF%9B%E5%88%B6/</url>
+    <content><![CDATA[<h2 id="为什么要说二进制"><a href="#为什么要说二进制" class="headerlink" title="为什么要说二进制"></a>为什么要说二进制</h2><p>起因 1：为什么 tinyint 有人说 最大存储是 0-255 ，又有人说是 -128 - 127?</p>
+<p>起因 2：计算机是如何实现下面的运算的？</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1+1 = 2</span><br><span class="line">1-2 = -1</span><br></pre></td></tr></table></figure>
+<p>起因 3：我看到了下面的一个代码，不是很明白</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">100 &lt;&lt; 1  等于几</span><br></pre></td></tr></table></figure>
+<h2 id="我所理解的"><a href="#我所理解的" class="headerlink" title="我所理解的"></a>我所理解的</h2><p>一个简单的问题：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">二进制 0001 1 2^0</span><br><span class="line">二进制 0010 2 2^1</span><br></pre></td></tr></table></figure>
+<h3 id="小知识点"><a href="#小知识点" class="headerlink" title="小知识点"></a>小知识点</h3><p>1 字节(byte) = 8 位(bit) <code>00000000</code></p>
+<p>2 字节(byte) = 16 位(bit) <code>00000000 00000000</code></p>
+<h3 id="二进制数分为有符号数，无符号数"><a href="#二进制数分为有符号数，无符号数" class="headerlink" title="二进制数分为有符号数，无符号数"></a>二进制数分为有符号数，无符号数</h3><h4 id="有符号数："><a href="#有符号数：" class="headerlink" title="有符号数："></a>有符号数：</h4><blockquote>
+<p>对于有符号数而言，符号的正、负机器是无法识别的，但由于“正、负”恰好是两种截然不同的状态，如果用“0”表示“正数”，用“1”表示”负数“，这样符号也被数字化了，并且规定将它放在有效数字的前面，即组成了有符号数。所以，在二进制中使用最高位（第一位）来表示符号，最高位是 0，表示正数；最高位是 1，表示负数</p>
+</blockquote>
+<p><code>00000001</code> 1 <code>10000001</code> -1</p>
+<h4 id="无符号数："><a href="#无符号数：" class="headerlink" title="无符号数："></a>无符号数：</h4><blockquote>
+<p>无符号数是针对二进制来讲的，无符号数的表数范围是非负数。全部二进制均代表数值（所有位都用于表示数的大小），没有符号位。即第一个’0’或’1’不表示正负</p>
+</blockquote>
+<p><code>11111111</code> 255</p>
+<h5 id="对于有符号数而言的性质"><a href="#对于有符号数而言的性质" class="headerlink" title="对于有符号数而言的性质"></a>对于有符号数而言的性质</h5><blockquote>
+<p>（1）二进制的最高位是符号位：0 表示正数，1 表示负数</p>
+<p>（2）正数的原码、反码、补码都一样</p>
+<p>（3）负数的反码 = 它的原码符号为不变，其他位去翻（0 -&gt; 1 ; 1-&gt; 0）</p>
+<p>（4）负数的补码 = 它的反码+1</p>
+<p>（5）0 的反码、补码都是 0</p>
+<p>（6）在计算机运算的时候，都是以补码的方式来运算的</p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>大小</th>
+<th>有符号</th>
+<th>无符号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tinyint</td>
+<td>1byte</td>
+<td>(-128,127)</td>
+<td>(0 , 255)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>(-2^7 ~ 2^7-1)</td>
+<td>(2^0-1 to 2^8-1)</td>
+</tr>
+<tr>
+<td>smaillint</td>
+<td>2bytes</td>
+<td>(-32768，32767)</td>
+<td>(0，65535)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>(-2^15~ 2^15-1)</td>
+<td>(2^0-1 to 2^16-1)</td>
+</tr>
+<tr>
+<td>int</td>
+<td>4bytes</td>
+<td>(-2147483648，2147483647)</td>
+<td>(0，4294967295)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>(-2^31~ 2^31-1)</td>
+<td>(2^0-1 to 2^32-1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="有符号的运算案例"><a href="#有符号的运算案例" class="headerlink" title="有符号的运算案例"></a>有符号的运算案例</h4><h5 id="补充二进制相加"><a href="#补充二进制相加" class="headerlink" title="补充二进制相加"></a>补充二进制相加</h5><ul>
+<li>当相应位的数值为 0，0 时，结果为 0。</li>
+<li>当相应位的数值为 1，0 或 0，1 时，结果为 1。</li>
+<li>当相应位的数值为 1，1 时，结果为 0，并向前一位产生进位 1。</li>
+</ul>
+<h5 id="1-正数相加"><a href="#1-正数相加" class="headerlink" title="1.正数相加"></a>1.正数相加</h5><p>例如：1+1，在计算机运算如下</p>
+<p>1 的原码为：<code>00000001</code>,因正数的原码、反码、补码都一样，所以反码、补码都是 <code>00000001</code></p>
+<p>两数的补码相加：<code>00000001</code>+<code>00000001</code> =<code>00000010</code></p>
+<p>转换为 10 进制 =2</p>
+<h5 id="2-正数相减"><a href="#2-正数相减" class="headerlink" title="2.正数相减"></a>2.正数相减</h5><p>例如：1-2，在计算机中的运算如下，</p>
+<p>在计算机中减运算其实是作为加法运算来操作的，所以，1-2=1+（-2）</p>
+<p>第一步：获取 1 的补码：<code>00000001</code></p>
+<p>第二步：获取-2 的补码：</p>
+<p>-2 的原码：<code>10000010</code></p>
+<p>-2 的反码：<code>11111101</code> 除了第一位，其他的需要翻</p>
+<p>-2 的补码：<code>11111110</code> 负数的补码 = 反码+1</p>
+<p>第三步：1 的补码 与 -2 的补码相加：</p>
+<p><code>00000001</code>+<code>11111110</code> = <code>11111111</code></p>
+<p>第四步：补码转原码，反其道而行之（如果想二进制转换为十进制，必须得到二进制的原码）</p>
+<p>补码：<code>11111111</code></p>
+<p>反码：<code>11111110</code> 刚才+1 了，所以现在要-1</p>
+<p>原码：<code>10000001</code></p>
+<p>第五步：二进制转换为十进制</p>
+<p>原码：<code>10000001</code> = -1</p>
+<h3 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h3><h4 id="位逻辑运算符"><a href="#位逻辑运算符" class="headerlink" title="位逻辑运算符"></a>位逻辑运算符</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>含义</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&amp;</td>
+<td>与</td>
+<td>a&amp;b</td>
+</tr>
+<tr>
+<td>｜</td>
+<td>或</td>
+<td>a\</td>
+<td>b</td>
+</tr>
+<tr>
+<td>～</td>
+<td>取反</td>
+<td>~a</td>
+</tr>
+<tr>
+<td>^</td>
+<td>异或(不相等 1 相等 0 ,同时 0，返回 0)</td>
+<td>a^b</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="二进制.assets/image-20230615162744885.png" alt="image-20230615162744885"></p>
+<h4 id="位移运算符-lt-lt-，-gt-gt-gt-gt-gt"><a href="#位移运算符-lt-lt-，-gt-gt-gt-gt-gt" class="headerlink" title="位移运算符 &lt;&lt;，&gt;&gt;,&gt;&gt;&gt;"></a>位移运算符 &lt;&lt;，&gt;&gt;,&gt;&gt;&gt;</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>含义</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;&lt;</td>
+<td>左移位</td>
+<td>a&lt;&lt;2</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>右移位</td>
+<td>b&gt;&gt;4</td>
+</tr>
+<tr>
+<td>&gt;&gt;&gt;</td>
+<td>无符号右移位</td>
+<td>x&gt;&gt;&gt;2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="左移运算符-lt-lt"><a href="#左移运算符-lt-lt" class="headerlink" title="左移运算符 &lt;&lt;"></a>左移运算符 &lt;&lt;</h5><h6 id="左移一位"><a href="#左移一位" class="headerlink" title="左移一位"></a>左移一位</h6><p><img src="二进制.assets/image-20230615172846433.png" alt="image-20230615172846433"></p>
+<p>左移一位后的数值经过计算可以发现刚好值为移前数值的两倍，等价于乘 2 操作，在很多情况下可以当作乘 2 使用，但是并不代表真正的乘 2，在一些特殊的情况下并不等价</p>
+<h6 id="左移-18-位"><a href="#左移-18-位" class="headerlink" title="左移 18 位"></a>左移 18 位</h6><p><img src="二进制.assets/image-20230615165940147.png" alt="image-20230615165940147"></p>
+<p>此时二进制首位为 1，此时数值为 -1058799616，同理，如果左位移 20 位，则值为 59768832 又变成了正数</p>
+<blockquote>
+<p>注意：所以根据这个规则，如果任意一个十进制的数左位移 32 位，右边补位 32 个 0，十进制岂不是都是 0 了？当然不是！！！ 当 int 类型的数据进行左移的时候，当左移的位数大于等于 32 位的时候，位数会先求余数，然后用该余数进行左移，也就是说，如果真的左移 32 位的时候，会先进行位数求余数，即为左移 32 位相当于左移 0 位 ，所以左移 33 的值和左移一位 1 是一样的</p>
+</blockquote>
+<h5 id="右移运算符-gt-gt"><a href="#右移运算符-gt-gt" class="headerlink" title="右移运算符 &gt;&gt;"></a>右移运算符 &gt;&gt;</h5><h6 id="正数右移"><a href="#正数右移" class="headerlink" title="正数右移"></a>正数右移</h6><p><img src="二进制.assets/image-20230615182511625.png" alt="image-20230615182511625"></p>
+<h6 id="负数右移"><a href="#负数右移" class="headerlink" title="负数右移"></a>负数右移</h6><p><img src="二进制.assets/image-20230615182615780.png" alt="image-20230615182615780"></p>
+<h5 id="无符号右移运算符-gt-gt-gt"><a href="#无符号右移运算符-gt-gt-gt" class="headerlink" title="无符号右移运算符 &gt;&gt;&gt;"></a>无符号右移运算符 &gt;&gt;&gt;</h5><p>不能用于 byte short</p>
+<p><img src="二进制.assets/image-20230615182726016.png" alt="image-20230615182726016"></p>
+]]></content>
+      <categories>
+        <category>计算机基础</category>
+      </categories>
+  </entry>
+</search>
