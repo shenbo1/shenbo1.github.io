@@ -6,7 +6,7 @@
   <link href="https://shenbo1.github.io/atom.xml" rel="self"/>
   
   <link href="https://shenbo1.github.io/"/>
-  <updated>2023-06-21T09:48:02.317Z</updated>
+  <updated>2023-06-29T08:15:08.188Z</updated>
   <id>https://shenbo1.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>你好-数组</title>
+    <link href="https://shenbo1.github.io/2023/06/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E7%BB%84/"/>
+    <id>https://shenbo1.github.io/2023/06/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E7%BB%84/</id>
+    <published>2023-06-29T08:14:00.000Z</published>
+    <updated>2023-06-29T08:15:08.188Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="数组理论基础"><a href="#数组理论基础" class="headerlink" title="数组理论基础"></a>数组理论基础</h2><h3 id="要点："><a href="#要点：" class="headerlink" title="要点："></a>要点：</h3><ol><li>数组是存放在<strong>连续内存空间</strong>上的相同类型数据的集合。</li><li>数组的内存空间地址是连续的</li><li>数组的下表都是从0开始</li><li>数组的元素是不能删的，只能覆盖</li></ol>]]></content>
+    
+    
+    <summary type="html">什么是数组？</summary>
+    
+    
+    
+    <category term="数据结构与算法" scheme="https://shenbo1.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>二进制</title>
